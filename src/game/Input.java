@@ -23,6 +23,9 @@ public class Input implements KeyListener {
     public static boolean rightReleased = true;
     public static boolean upPressed = false;
     public boolean upReleased = true;
+    public static boolean jPressed = false;
+    public static boolean jReleased = true;
+    public static boolean commaPressed;
 
 
     @Override
@@ -58,6 +61,11 @@ public class Input implements KeyListener {
         if(keyEvent.getKeyCode() == keyEvent.VK_RIGHT){
             rightPressed = true;
         }
+        if(keyEvent.getKeyCode() == keyEvent.VK_J)
+            jPressed = true;
+        if(keyEvent.getKeyCode() == keyEvent.VK_COMMA)
+            commaPressed = true;
+
     }
 
     @Override
@@ -66,6 +74,8 @@ public class Input implements KeyListener {
             APressed = false;
         if(keyEvent.getKeyCode() == keyEvent.VK_D)
             DPressed =false;
+        if(keyEvent.getKeyCode() == keyEvent.VK_COMMA)
+            commaPressed = false;
         if(keyEvent.getKeyCode() == keyEvent.VK_S){
             SPressed = false;
         }
@@ -85,6 +95,8 @@ public class Input implements KeyListener {
         if(keyEvent.getKeyCode() == keyEvent.VK_RIGHT){
             rightPressed = false;
         }
+        if(keyEvent.getKeyCode() == keyEvent.VK_J)
+            jPressed = false;
 
     }
 }

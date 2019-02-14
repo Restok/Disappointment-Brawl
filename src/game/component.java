@@ -34,6 +34,8 @@ public class component implements Updatable, Renderable {
         this.speedY = speedY;
     }
 
+    public component() {
+    }
 
     public component(float x, float y, int width, int height, Color color, BufferedImage normalState, BufferedImage action, String type) {
         this.x = x;

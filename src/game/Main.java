@@ -15,11 +15,23 @@ public class Main {
         component groundOne = new component(0, g.HEIGHT*2/3, g.WIDTH, 30, dirt, null, null, null);
         component grassOne = new component(0, g.HEIGHT*2/3-10, g.WIDTH, 10, grass, null, null, null);
 
-        component player1 = new Player(0, g.HEIGHT*2/3-150, 100, 150, Color.RED, null, null, null, 100,1,3);
-        component player2 = new Player2(Game.WIDTH-100, g.HEIGHT*2/3-150, 100, 150, Color.BLUE, null, null, null, 100,1,3);
+        Player player1 = new Player(0, g.HEIGHT*2/3-150, 100, 150, Color.RED, null, null, null, 100,1,3);
+        Player player2 = new Player2(Game.WIDTH-100, g.HEIGHT*2/3-150, 100, 150, Color.BLUE, null, null, null, 100,1,3);
 //        ((Player) player1).ground = groundOne;
-        ((Player) player1).ground.add(groundOne);
-        ((Player2) player2).ground.add(groundOne);
+        for(int z =0; z<=player1.lasersLimit; z++) {
+            hotLaser laser = new hotLaser(-20, player1.getY()+50, 20, 5, Color.red, null, null, null);
+            allGameObjects.add(laser);
+            player1.lasers.add(laser);
+            hotLaser laser2 = new hotLaser(-20, player2.getY()+50, 20, 5, Color.BLUE, null, null, null);
+            player2.lasers.add(laser2);
+            allGameObjects.add(laser2);
+        }
+
+        player1.ground.add(groundOne);
+        player2.ground.add(groundOne);
+
+        player1.enemy.add(player2);
+        player2.enemy.add(player1);
 
         allGameObjects.add(groundOne);
         allGameObjects.add(grassOne);

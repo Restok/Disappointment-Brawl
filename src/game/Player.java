@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player extends component {
@@ -75,19 +76,33 @@ public class Player extends component {
 
     public void control(){
 
-        if(Input.APressed)
+        if(Input.APressed) {
             this.setSpeedX(-movementSpeed);
+            try {
+                this.setNormalState(Sprite.getSprite("Will_Left.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if(Input.WPressed){
             if(this.getSpeedY()==0 && boundaries())
                 jump();
         }
-        if(Input.DPressed)
+        if(Input.DPressed) {
             this.setSpeedX(movementSpeed);
+            try {
+                this.setNormalState(Sprite.getSprite("Will.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if((!Input.APressed && Input.AReleased) && ((!Input.DPressed)&& Input.DReleased))
             this.setSpeedX(0);
+
         if(Input.jPressed &&canAttackAgain)
             disappoint(enemy.get(0));
-        if(!Input.jPressed&&Input.jReleased)
+
+        if(!Input.jPressed && Input.jReleased)
             canAttackAgain = true;
     }
 
@@ -119,7 +134,13 @@ public class Player extends component {
         super.update(input);
         boundaries();
         control();
-
+        for(hotLaser las : lasers){
+            if(enemy.get(0).crashWith(las)){
+                las.setX(-20);
+                las.setSpeedX(0);
+                enemy.get(0).health-=this.damage;
+            }
+        }
         this.setSpeedY((this.getSpeedY() + this.gravity));
         this.setY(this.getY()+this.getSpeedY());
         this.setX(this.getX()+this.getSpeedX());
@@ -133,7 +154,7 @@ public class Player extends component {
         increment +=1;
 
         laser.setX(this.getX());
-        laser.setY(this.getY()+50);
+        laser.setY((float) (this.getY()+this.getHeight()/2.0));
         if(otherplayer.getX()<this.getX()){
             laser.setSpeedX(-10);
 

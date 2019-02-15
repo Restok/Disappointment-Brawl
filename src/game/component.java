@@ -117,7 +117,7 @@ public class component implements Updatable, Renderable {
     public void render(Graphics2D g, float interpolation) {
         g.setColor(this.color);
 
-        if(type == "image")
+        if(type == ("image"))
             g.drawImage(normalState, (int)this.x, (int)this.y, null);
         else
             g.fillRect((int)this.x, (int)this.y, this.width, this.height);

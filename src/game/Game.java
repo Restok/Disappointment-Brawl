@@ -6,8 +6,8 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import game.Main;
 public class Game {
-    public final static int WIDTH = 1200;
-    public final static int HEIGHT = 800;
+    public final static int WIDTH = 900;
+    public final static int HEIGHT = 900;
     private String gameName = "Disappointment Brawl";
     private Canvas game = new Canvas();
 

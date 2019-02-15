@@ -2,6 +2,7 @@ package game;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Player2 extends Player {
 
@@ -14,14 +15,26 @@ public class Player2 extends Player {
 
     @Override
     public void control() {
-        if(Input.leftPressed)
+        if(Input.leftPressed) {
             this.setSpeedX(-movementSpeed);
+            try {
+                this.setNormalState(Sprite.getSprite("Adam_Left.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if(Input.upPressed){
             if(this.getSpeedY()==0 && boundaries())
                 jump();
         }
-        if(Input.rightPressed)
+        if(Input.rightPressed) {
             this.setSpeedX(movementSpeed);
+            try {
+                this.setNormalState(Sprite.getSprite("Adam.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if((!Input.leftPressed && Input.leftReleased) && ((!Input.rightPressed)&& Input.rightReleased))
             this.setSpeedX(0);
         if(Input.commaPressed && canAttackAgain)

@@ -6,8 +6,9 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import game.Main;
 public class Game {
-    public final static int WIDTH = 900;
-    public final static int HEIGHT = 900;
+    public final static int WIDTH = 700;
+    public final static int HEIGHT = 700;
+    public static boolean gameOver = false;
     private String gameName = "Disappointment Brawl";
     private Canvas game = new Canvas();
 
@@ -51,9 +52,12 @@ public class Game {
         gameWindow.add(game);
         gameWindow.setLocationRelativeTo(null); // makes the window centered on screen
 
+
+
         // Initialize input
         input = new Input();
         game.addKeyListener(input);
+        game.addMouseListener(input);
         // Game loop
         boolean running = true;
 

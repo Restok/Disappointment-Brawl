@@ -18,6 +18,16 @@ public class Player extends component {
     public int lasersLimit = 2;
     public int increment = 0;
     public boolean canAttackAgain = true;
+    public component hpBar = new component(10, Game.HEIGHT/4,25,300-18, Color.GREEN, null, null, null);
+    public component gameOver;
+
+    {
+        try {
+            gameOver = new component(-1200, 0,25,0, Color.GREEN, Sprite.getSprite("p1Wins.png"), null, "image");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public boolean isFalling() {
         return falling;
@@ -118,10 +128,11 @@ public class Player extends component {
             setX(Game.WIDTH-this.getWidth());
 
         for(component g : ground){
-            if(g.crashWith(this)) {
+            if(this.getY()<=g.getY() && g.crashWith(this)) {
                 setSpeedY(0);
                 gravity = 0f;
                 canJump = true;
+                break;
             }
             else
                 gravity = 0.25f;
@@ -136,9 +147,14 @@ public class Player extends component {
         control();
         for(hotLaser las : lasers){
             if(enemy.get(0).crashWith(las)){
-                las.setX(-20);
+                las.setX(-200);
                 las.setSpeedX(0);
                 enemy.get(0).health-=this.damage;
+                enemy.get(0).hpBar.setHeight(enemy.get(0).hpBar.getHeight()-((int)(enemy.get(0).hpBar.getHeight()*((double)this.damage / enemy.get(0).health))));
+                if(enemy.get(0).health<=0){
+                    gameOver.setX(0);
+                    Game.gameOver = true;
+                }
             }
         }
         this.setSpeedY((this.getSpeedY() + this.gravity));

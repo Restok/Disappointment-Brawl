@@ -128,7 +128,6 @@ public class component implements Updatable, Renderable {
     public void update(Input input) {
         this.x += speedX;
         this.y += speedY;
-
     }
 
     public boolean crashWith(component otherobj){

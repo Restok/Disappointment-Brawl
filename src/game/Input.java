@@ -2,8 +2,10 @@ package game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Input implements KeyListener {
+public class Input implements KeyListener, MouseListener {
 
     public boolean spacePressed = false;
     public boolean spaceReleased = true;
@@ -97,6 +99,37 @@ public class Input implements KeyListener {
         }
         if(keyEvent.getKeyCode() == keyEvent.VK_J)
             jPressed = false;
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if(Game.gameOver){
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if(Game.gameOver){
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if(Game.gameOver){
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }
